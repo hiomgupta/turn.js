@@ -1,0 +1,677 @@
+/* ===================================
+   Playbook - Diary Aesthetic Styles
+   =================================== */
+
+:root {
+  /* Paper colors - warm, aged feel */
+  --paper-light: #faf6f1;
+  --paper-dark: #f0ebe3;
+  --paper-accent: #e8dfd5;
+  
+  /* Text colors */
+  --text-dark: #3e3e3e;
+  --text-light: #888;
+  
+  /* Accents */
+  --accent-warm: #d4a574;
+  --accent-link: #8b7355;
+  --shadow-soft: rgba(0, 0, 0, 0.08);
+  
+  /* Fonts */
+  --serif-font: 'Georgia', 'Garamond', serif;
+  --sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  /* Spacing */
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--serif-font);
+  background: linear-gradient(135deg, #3a3a3a 0%, #1a1a1a 100%);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===================================
+   Header
+   =================================== */
+
+.playbook-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(20, 20, 20, 0.95);
+  backdrop-filter: blur(10px);
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  text-align: center;
+}
+
+.book-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.book-subtitle {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 0.5rem;
+  font-style: italic;
+  font-family: var(--sans-font);
+  font-weight: 300;
+}
+
+/* ===================================
+   Progress Bar
+   =================================== */
+
+.progress-bar-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background: rgba(20, 20, 20, 0.95);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.progress-bar-bg {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #d4a574, #8b7355);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(212, 165, 116, 0.5);
+}
+
+.progress-bar-markers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  pointer-events: all;
+}
+
+.chapter-marker {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.marker-dot {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.chapter-marker:hover .marker-dot {
+  background: #d4a574;
+  width: 16px;
+  height: 16px;
+  box-shadow: 0 0 15px rgba(212, 165, 116, 0.6);
+}
+
+.chapter-marker.active .marker-dot {
+  background: #d4a574;
+  width: 14px;
+  height: 14px;
+}
+
+.marker-label {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-family: var(--sans-font);
+}
+
+.chapter-marker:hover .marker-label {
+  opacity: 1;
+}
+
+.progress-info {
+  font-size: 0.85rem;
+  color: #888;
+  font-family: var(--sans-font);
+  white-space: nowrap;
+}
+
+/* ===================================
+   Main Playbook Container
+   =================================== */
+
+.playbook-container {
+  margin-top: 80px;
+  margin-bottom: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 180px);
+  padding: var(--spacing-lg);
+}
+
+/* Opening animation - closed book effect */
+.playbook-container.opening {
+  animation: bookOpening 1.5s ease-out;
+}
+
+@keyframes bookOpening {
+  0% {
+    transform: perspective(1000px) rotateY(90deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: perspective(1000px) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+/* ===================================
+   Pages - turn.js Pages
+   =================================== */
+
+.page {
+  background: var(--paper-light);
+  position: relative;
+}
+
+.page-inner {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, var(--paper-light) 0%, var(--paper-dark) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle page shadow/depth */
+.page-inner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.03) 100%);
+  pointer-events: none;
+}
+
+.page-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1rem;
+}
+
+/* ===================================
+   Page Image
+   =================================== */
+
+.page-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-md);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--paper-accent);
+  box-shadow: 0 8px 24px var(--shadow-soft);
+}
+
+.page-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+/* Slight zoom on page turn for emphasis */
+.page.active .page-image img {
+  animation: imageReveal 0.8s ease-out;
+}
+
+@keyframes imageReveal {
+  0% {
+    transform: scale(1.02);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ===================================
+   Page Text (Diary Entry)
+   =================================== */
+
+.page-text {
+  flex: 0.6;
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md) 0;
+}
+
+.page-text p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text-dark);
+  font-style: italic;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* ===================================
+   Page Music Player
+   =================================== */
+
+.page-music {
+  flex: 0.8;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.music-player {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.music-player.playing {
+  opacity: 1;
+  animation: playerGlow 0.6s ease;
+}
+
+@keyframes playerGlow {
+  0% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Spotify/SoundCloud embed styling */
+.music-player iframe {
+  border-radius: 8px;
+  border: none;
+}
+
+/* Custom audio player */
+.audio-player {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: var(--spacing-md);
+}
+
+.audio-info {
+  margin-bottom: var(--spacing-sm);
+  text-align: center;
+}
+
+.audio-title {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+}
+
+.audio-artist {
+  color: var(--text-light);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+audio {
+  width: 100%;
+  height: 32px;
+}
+
+.page-indicator {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-family: var(--sans-font);
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.music-status {
+  display: inline-block;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ===================================
+   Page Footer (Page Number)
+   =================================== */
+
+.page-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.page-number {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-family: var(--sans-font);
+  letter-spacing: 1px;
+}
+
+/* ===================================
+   Chapter Cover
+   =================================== */
+
+.chapter-cover {
+  background: linear-gradient(135deg, var(--paper-accent) 0%, var(--paper-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chapter-content {
+  text-align: center;
+}
+
+.chapter-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--accent-warm);
+  margin: var(--spacing-lg) auto;
+  opacity: 0.6;
+}
+
+.chapter-title {
+  font-size: 2rem;
+  color: var(--accent-warm);
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+/* ===================================
+   Last Page
+   =================================== */
+
+.last-page {
+  background: linear-gradient(135deg, var(--paper-dark) 0%, var(--paper-accent) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.end-message {
+  text-align: center;
+}
+
+.end-message h2 {
+  font-size: 2.5rem;
+  color: var(--accent-warm);
+  margin-bottom: var(--spacing-lg);
+  letter-spacing: 3px;
+}
+
+.end-message p {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-lg);
+  font-style: italic;
+}
+
+.end-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ===================================
+   Buttons
+   =================================== */
+
+.btn {
+  padding: 0.75rem 2rem;
+  border: 1px solid var(--accent-warm);
+  background: transparent;
+  color: var(--accent-warm);
+  border-radius: 4px;
+  font-family: var(--sans-font);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.btn:hover {
+  background: var(--accent-warm);
+  color: var(--paper-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(212, 165, 116, 0.3);
+}
+
+/* ===================================
+   Footer
+   =================================== */
+
+.playbook-footer {
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  right: 0;
+  padding: var(--spacing-md) var(--spacing-lg);
+  text-align: center;
+  font-size: 0.8rem;
+  color: #666;
+  font-family: var(--sans-font);
+  pointer-events: none;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: var(--spacing-md);
+}
+
+.nav-hint {
+  opacity: 0.6;
+  animation: fadeInOut 3s ease-in-out infinite;
+}
+
+.book-info {
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ===================================
+   Modal
+   =================================== */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal:not(.hidden) {
+  display: flex;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: var(--paper-light);
+  padding: var(--spacing-lg);
+  border-radius: 8px;
+  max-width: 500px;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--text-dark);
+}
+
+.modal h2 {
+  font-size: 1.8rem;
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-dark);
+}
+
+.share-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.share-btn {
+  padding: var(--spacing-md);
+  background: var(--accent-warm);
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-family: var(--sans-font);
+  font-weight: 600;
+}
+
+.share-btn:hover {
+  background: var(--accent-link);
+  transform: translateX(4px);
+}
+
+/* ===================================
+   Responsive
+   =================================== */
+
+@media (max-width: 768px) {
+  .book-title {
+    font-size: 1.3rem;
+  }
+
+  .page-inner {
+    padding: 1.5rem;
+  }
+
+  .page-text p {
+    font-size: 0.9rem;
+  }
+
+  .playbook-footer {
+    display: none;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* ===================================
+   Accessibility
+   =================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

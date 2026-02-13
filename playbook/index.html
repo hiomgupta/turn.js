@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbook - Know the Artist from My View</title>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- turn.js -->
+    <script src="js/vendor/turn.min.js"></script>
+    
+    <!-- Playbook Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="playbook-header">
+        <div class="header-content">
+            <h1 class="book-title">Know Eminem From My View</h1>
+            <p class="book-subtitle">A Digital Diary</p>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div id="progress-bar" class="progress-bar-wrapper"></div>
+
+    <!-- Main Book Container -->
+    <div id="book" class="playbook-container">
+        <!-- Pages will be inserted here dynamically -->
+    </div>
+
+    <!-- Navigation Footer -->
+    <footer class="playbook-footer">
+        <div class="footer-content">
+            <span class="nav-hint">← Keyboard arrows or click to navigate →</span>
+            <span class="book-info">Created by You • Powered by Playbook</span>
+        </div>
+    </footer>
+
+    <!-- Share Modal (optional) -->
+    <div id="share-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2>Share This Story</h2>
+            <div class="share-buttons">
+                <a href="#" class="share-btn share-twitter">Share on Twitter</a>
+                <a href="#" class="share-btn share-facebook">Share on Facebook</a>
+                <a href="#" class="share-btn share-link">Copy Link</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Playbook App Scripts -->
+    <script src="js/app/music-manager.js"></script>
+    <script src="js/app/page-generator.js"></script>
+    <script src="js/app/progress-bar.js"></script>
+    <script src="js/app/playbook.js"></script>
+
+    <!-- Initialize Playbook -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create Playbook instance
+            const playbook = new Playbook({
+                container: '#book'
+            });
+
+            // Initialize with book data
+            playbook.init('data/book.json');
+
+            // Optional: Export to window for debugging
+            window.playbook = playbook;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "title": "Know Eminem From My View",
+    "artist": "Eminem",
+    "author": "Your Name",
+    "description": "A digital diary of emotional moments",
+    "version": "1.0"
+  },
+  "chapters": [
+    {
+      "id": "chapter-1",
+      "title": "The Beginning",
+      "pages": [
+        {
+          "id": "page-1",
+          "image": "assets/images/cover.jpg",
+          "text": "I was 14 when I first heard 'The Real Slim Shady'. I didn't understand all the words, but I felt something. A voice that didn't care about being liked. That mattered to me.",
+          "song": {
+            "title": "The Real Slim Shady",
+            "artist": "Eminem",
+            "url": "https://open.spotify.com/embed/track/3qm84nBhEHuj7dYJfV31Ge",
+            "audioId": "spotify-real-slim-shady"
+          }
+        },
+        {
+          "id": "page-2",
+          "image": "assets/images/page-2.jpg",
+          "text": "Unlike other rappers, he didn't rap about being untouchable. He rapped about being broken. About the struggle. That's when I realized—this isn't just music. It's therapy.",
+          "song": {
+            "title": "Lose Yourself",
+            "artist": "Eminem",
+            "url": "https://open.spotify.com/embed/track/3qm84nBhEHuj7dYJfV31Ge",
+            "audioId": "spotify-lose-yourself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "chapter-2",
+      "title": "Growing Up",
+      "pages": [
+        {
+          "id": "page-3",
+          "image": "assets/images/page-3.jpg",
+          "text": "By college, his albums were my soundtrack to survival. Every breakup, every doubt, every 'I can't do this'—he had a song that made me feel less alone.",
+          "song": {
+            "title": "Stronger Than I Was",
+            "artist": "Eminem",
+            "url": "https://open.spotify.com/embed/track/3qm84nBhEHuj7dYJfV31Ge",
+            "audioId": "spotify-stronger"
+          }
+        }
+      ]
+    }
+  ]
+}
